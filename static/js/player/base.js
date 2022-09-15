@@ -38,12 +38,30 @@ class Player extends GameObject {
 
     }
 
-    update_move() {
+    update_control() {
 
     }
 
-    update_control() {
+    update_move() {
+        this.vy += this.gravity;
 
+        this.x += this.vx * this.timedelta / 1000;
+        this.y += this.vy * this.timedelta / 1000;
+
+
+        if (this.y > 450) {
+            this.y = 450;
+            this.vy = 0;
+
+            if (this.status === 3) this.status = 0;
+        }
+
+        if (this.x < 0) {
+            this.x = 0;
+        }
+        
+        //let msg = `id = ${this.id} position = (${this.x}, ${this.y})`;
+        //console.log(msg);
     }
 
     update_direction() {
@@ -63,13 +81,14 @@ class Player extends GameObject {
     }
 
     update() {
+        this.update_move();
         this.render();
     }
 
     render() {
         let status = this.status;
 
-        this.ctx.fillRect(this.x, this.y, this.height, this.width);
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.ctx.fillStyle = this.color;
     }
 }

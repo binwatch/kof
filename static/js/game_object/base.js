@@ -33,7 +33,7 @@ let GAME_OBJECTS_FRAME = (timestamp) => {
         if (!obj.has_call_start) {
             obj.start();
             obj.has_call_start = true;
-        } else {
+        } else {    // set timedelta of GO to update action
             obj.timedelta = timestamp - last_timestamp;
             obj.update();
         }
