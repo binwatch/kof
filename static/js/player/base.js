@@ -69,7 +69,8 @@ class Player extends GameObject {
     render() {
         let status = this.status;
 
-        
+        this.ctx.fillRect(this.x, this.y, this.height, this.width);
+        this.ctx.fillStyle = this.color;
     }
 }
 
