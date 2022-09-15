@@ -25,7 +25,7 @@ class Kyo extends Player {
 
             gif.onload = function() {
                 let obj = outer.animations.get(i);
-                obj.frame_cnt = gif.frames.length();
+                obj.frame_cnt = gif.frames.length;
                 obj.loaded = true;
 
                 if (i === 3) {

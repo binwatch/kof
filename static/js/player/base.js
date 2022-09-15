@@ -135,8 +135,36 @@ class Player extends GameObject {
     render() {
         let status = this.status;
 
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        this.ctx.fillStyle = this.color;
+        // show the gif for each animation
+        let obj = this.animations.get(status);
+        if (obj && obj.loaded) {
+            if (this.direction > 0) {
+                let k = parseInt(this.frame_current_cnt / obj.frame_rate) % obj.frame_cnt;
+                let image = obj.gif.frames[k].image;
+                this.ctx.drawImage(image, this.x, this.y + obj.offset_y, image.width * obj.scale, image.height * obj.scale);
+            } else {
+                this.ctx.save();
+                this.ctx.scale(-1, 1);
+                this.ctx.translate(-this.root.game_map.$canvas.width(), 0);
+
+                let k = parseInt(this.frame_current_cnt / obj.frame_rate) % obj.frame_cnt;
+                let image = obj.gif.frames[k].image;
+                this.ctx.drawImage(image, this.x, this.y + obj.offset_y, image.width * obj.scale, image.height * obj.scale);
+
+                this.ctx.restore();
+            }
+        } else {
+            this.ctx.fillRect(this.x, this.y, this.width, this.height);
+            this.ctx.fillStyle = this.color;
+        }
+
+        if (status === 4) {
+            if (this.frame_current_cnt == obj.frame_rate * (obj.frame_cnt - 1)) {
+                this.status = 0;
+            }
+        }
+
+        this.frame_current_cnt ++;
     }
 }
 
