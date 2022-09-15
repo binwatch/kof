@@ -108,9 +108,6 @@ class Player extends GameObject {
         } else if (this.x + this.width > this.root.game_map.$canvas.width()) {
             this.x = this.root.game_map.$canvas.width() - this.width;
         }
-        
-        //let msg = `id = ${this.id} position = (${this.x}, ${this.y})`;
-        //console.log(msg);
     }
 
     update_direction() {
