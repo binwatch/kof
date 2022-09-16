@@ -218,9 +218,13 @@ class Player extends GameObject {
             this.ctx.fillStyle = this.color;
         }
 
-        if (status === 4) {
+        if (status === 4 || status === 5 || status === 6) {
             if (this.frame_current_cnt == obj.frame_rate * (obj.frame_cnt - 1)) {
-                this.status = 0;
+                if (status === 6) { // if dead, hold the status
+                    this.frame_current_cnt --;
+                } else {
+                    this.status = 0;
+                }
             }
         }
 
